@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Survey class="surveyPage"></Survey>
-    <Result class="resultPage"></Result>
+    <Survey class="surveyPage" v-on:submit="submit" v-on:clearAll="clearAll"></Survey>
+    <Result class="resultPage" v-bind:propsdata="answers"></Result>
   </div>
 </template>
 
@@ -10,9 +10,24 @@ import content from "../components/content.vue";
 import sidebar from "../components/sidebar.vue";
 export default {
   name: "home",
+  data() {
+    return {
+      answers: []
+    };
+  },
   components: {
     Survey: content,
     Result: sidebar
+  },
+  methods: {
+    submit(index, ans) {
+      localStorage.setItem(index, ans);
+      this.answers.push(ans);
+    },
+    clearAll() {
+      localStorage.clear();
+      this.answers = [];
+    }
   }
 };
 </script>

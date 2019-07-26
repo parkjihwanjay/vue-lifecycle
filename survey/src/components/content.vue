@@ -16,7 +16,7 @@
         bezier-easing-value=".5,0,.35,1"
         v-on:itemchanged="onItemChanged"
       >
-        <a href="#question2" class="scrollactive-item nextBtn shadow" @click="submit1">다음</a>
+        <a href="#question2" class="scrollactive-item nextBtn shadow" @click="submit">다음</a>
       </scrollactive>
     </div>
     <div class="qBox" id="question2">
@@ -34,7 +34,7 @@
         bezier-easing-value=".5,0,.35,1"
         v-on:itemchanged="onItemChanged"
       >
-        <a href="#question3" class="scrollactive-item nextBtn shadow" @click="submit2">다음</a>
+        <a href="#question3" class="scrollactive-item nextBtn shadow" @click="submit">다음</a>
       </scrollactive>
     </div>
     <div class="qBox" id="question3">
@@ -46,7 +46,7 @@
         <button class="Btn shadow" value="20권 미만" @click="answer">20권 미만</button>
         <button class="Btn shadow" value="20권 이상" @click="answer">20권 이상</button>
       </div>
-      <a href="#footer" class="scrollactive-item nextBtn shadow" @click="submit3">다음</a>
+      <a href="#footer" class="scrollactive-item nextBtn shadow" @click="submit">다음</a>
     </div>
 
     <div class="footer" id="footer">
@@ -68,20 +68,18 @@ export default {
   name: "survey",
   data() {
     return {
-      ans: ""
+      ans: "",
+      index: 0
     };
   },
   methods: {
     onItemChanged() {},
-    submit1() {
-      localStorage.setItem(0, this.ans);
+    submit() {
+      localStorage.setItem(this.index, this.ans);
+      this.$emit("submit", this.index, this.ans);
+      this.index += 1;
     },
-    submit2() {
-      localStorage.setItem(1, this.ans);
-    },
-    submit3() {
-      localStorage.setItem(2, this.ans);
-    },
+
     // 다음 버튼을 눌렀을 때 질문 페이지 하나당 로컬스토리지 키 하나를 할당하여, ans 값을 저장
     answer(event) {
       var a = event.target.value;
@@ -89,7 +87,8 @@ export default {
     },
     //선택지(버튼)를 눌렀을때 event 해당 선택지의 값(event.target.value)을 ans에 임시 저장.
     end() {
-      localStorage.clear();
+      this.$emit("clearAll");
+      this.index = 0;
     }
     // 설문완료 누르면 로컬스토리지 비움!
   }
