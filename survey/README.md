@@ -1,8 +1,10 @@
 # survey
 
-## Project setup
+## Project setup ! 
 ```
-npm install
+git clone으로 파일을 내려받으신 후에
+
+$npm install
 ```
 
 ### Compiles and hot-reloads for development
@@ -10,20 +12,3 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
