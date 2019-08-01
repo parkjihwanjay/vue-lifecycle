@@ -20,7 +20,10 @@
 <script>
 export default {
   name: "sidebar",
-  props: ["propsdata"]
+  props: ["propsdata"],
+  beforeUpdate: function() {
+    console.log("제발");
+  }
 };
 
 // created() {
@@ -35,17 +38,4 @@ export default {
 </script>
 
 <style scoped>
-span {
-  font-weight: bold;
-}
-.results {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 70%;
-
-  font-size: 1.2em;
-  font-weight: 300;
-}
 </style>
